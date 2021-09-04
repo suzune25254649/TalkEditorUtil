@@ -1,0 +1,35 @@
+# シャープで始まる行は無視されますので、ここに解説を書きます。
+#
+# 各エディタで出力したWAVファイルの末尾に、終了ポーズ（末尾無音）を足す設定をするファイルです。
+#
+# エディタ名 = 時間(ミリ秒)
+#
+# の形で設定を行います。
+#
+# 【エディタ名の一覧】
+#   VoiceroidEditor             ※VOICEROID2エディタのことです
+#   GynoidTalkEditor
+#   CeVIO Creative Studio       ※CeVIO CS7のことです。CS6は非対応です
+#   SofTalk
+#   CeVIO AI
+#   音街ウナTalk Ex
+#   VOICEROID＋ 民安ともえ EX
+#   VOICEROID＋ 京町セイカ EX
+#   VOICEROID＋ 東北ずん子 EX
+#   VOICEROID＋ 東北きりたん EX
+#   VOICEROID＋ 水奈瀬コウ EX       ※未確認
+#   VOICEROID＋ 結月ゆかり EX       ※未確認
+#   VOICEROID＋ 鷹の爪 吉田くん EX  ※未確認
+#   VOICEROID＋ 月読アイ EX         ※未確認
+#   VOICEROID＋ 月読ショウタ EX     ※未確認
+
+# CeVIO系は、本家エディタで設定をおこなっても終末ポーズが付かないため、ここでつける。
+
+CeVIO Creative Studio = 800
+CeVIO AI = 800
+
+
+# SofTalkは、500msの終末ポーズが入るので、800になるように300足すことにしておきました。800msはVOICEROID2のデフォルト終末ポーズ長です。
+
+SofTalk = 300
+

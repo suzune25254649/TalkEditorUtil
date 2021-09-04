@@ -1,0 +1,44 @@
+# シャープで始まる行は無視されますので、ここに解説を書きます。
+#
+# 名前 = エディタ名
+#
+# の形で設定を行います。
+# 名前は「話者名の先頭がこの名前で始まっている」場合にヒットします。
+# 例：
+#   鳴花 = GynoidTalkEditor
+# この場合は、話者名が「鳴花 ヒメ」「鳴花 ミコト」などでヒットします。
+# しかし「春鳴花さん」ではヒットいません。
+#
+# ヒットした行の「エディタ名」で指定されたエディタで、音声再生や音声保存が行われます。
+# 名前 default の行は、他全ての設定でヒットしなかった話者名で採用されます。
+#
+# 【エディタ名の一覧】
+#   VoiceroidEditor             ※VOICEROID2エディタのことです
+#   GynoidTalkEditor
+#   CeVIO Creative Studio       ※CeVIO CS7のことです。CS6は非対応です
+#   SofTalk
+#   CeVIO AI
+#   音街ウナTalk Ex
+#   VOICEROID＋ 民安ともえ EX
+#   VOICEROID＋ 京町セイカ EX
+#   VOICEROID＋ 東北ずん子 EX
+#   VOICEROID＋ 東北きりたん EX
+#   VOICEROID＋ 水奈瀬コウ EX       ※未確認
+#   VOICEROID＋ 結月ゆかり EX       ※未確認
+#   VOICEROID＋ 鷹の爪 吉田くん EX  ※未確認
+#   VOICEROID＋ 月読アイ EX         ※未確認
+#   VOICEROID＋ 月読ショウタ EX     ※未確認
+
+
+default     = VoiceroidEditor
+鳴花        = GynoidTalkEditor
+flower      = GynoidTalkEditor
+IA          = CeVIO Creative Studio
+ONE         = CeVIO Creative Studio
+EX音街      = 音街ウナTalk Ex
+EX京町      = VOICEROID＋ 京町セイカ EX
+EX東北 ず   = VOICEROID＋ 東北ずん子 EX
+EX東北 き   = VOICEROID＋ 東北きりたん EX
+EX弦巻      = VOICEROID＋ 民安ともえ EX
+ゆっくり    = SofTalk
+小春六花    = CeVIO AI
