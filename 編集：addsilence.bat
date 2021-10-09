@@ -1,1 +1,0 @@
-start %~dp0\sakura\sakura.exe sakura\macro\addsilence.txt

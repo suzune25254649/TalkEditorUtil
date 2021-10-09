@@ -1,5 +1,9 @@
 
 (function() {
+	if (0 != DefineConstVar()) {
+		return;
+	}
+
 	//	現在の会話行を抽出する
 	var nowtalk = GetCurrentTalk();
 	if (!nowtalk[0]) {
@@ -12,12 +16,69 @@
 
 	var processName = GetTalkerProcessName(talker);
 
-	var PLAY = 1;
-	var TEXT = 2;
-	var SAVE = 4;
-	var SAVEALL = 8;
-	RunRemoteTalkEditor("TransferString.exe -t RemoteTalkEditor64 -e RemoteTalkEditor64.exe " + (PLAY | TEXT) + " \"" + processName + "\t" + text + "\"");
+	var EDITOR  = 1;
+	var PLAY = 2;
+	var TEXT = 4;
+	var SAVE = 8;
+	var SAVEALL = 16;
+	var SYNC = 32;
+	var CONFIG = 64;
+	RunRemoteTalkEditor("TransferString.exe -t RemoteTalkEditor64 -e RemoteTalkEditor64.exe " + (EDITOR | PLAY | TEXT | CONFIG) + " \"1.1.0\t" + processName + "\t" + text + "\t" + DEFINE_CONFIG + "\"");
 })();
+
+function DefineConstVar() {
+	DEFINE_CONFIG = Editor.ExpandParameter('$M').split("\\").reverse().slice(1).reverse().join("\\");
+
+	var error_count = 0;
+	var last = Editor.GetLineCount(0);
+	for (var lineno = 1; lineno < last; ++lineno) {
+		var str = Editor.GetLineStr(lineno);
+		var ch = str.charAt(0);
+		if ('$' == ch) {
+			str = str.substr(1);
+			var index = str.indexOf('=');
+			if (-1 == index) {
+				ErrorMsg("= が見つかりません。\n\n" + Editor.GetLineStr(lineno));
+				++error_count;
+			}
+			else {
+				var name = str.substr(0, index).replace(/(^\s+)|(\s+$)/g, "");
+				var value = str.substr(index + 1).replace(/(^\s+)|(\s+$)/g, "");
+
+				if ('OUTPUT' == name) {
+					if (':' == value.indexOf(1) || '\\' == value.indexOf(0)) {
+						//	絶対パス
+						DEFINE_OUTPUT = value;
+					}
+					else {
+						//	相対パス
+						DEFINE_OUTPUT = Editor.ExpandParameter('$F').split("\\").reverse().slice(1).reverse().join("\\") + "\\" + value;
+					}
+					DEFINE_OUTPUT = DEFINE_OUTPUT.replace('/', '\\');
+				}
+				else if ('CONFIG' == name) {
+					if (':' == value.indexOf(1) || '\\' == value.indexOf(0)) {
+						//	絶対パス
+						DEFINE_CONFIG = value;
+					}
+					else {
+						//	相対パス
+						DEFINE_CONFIG = Editor.ExpandParameter('$F').split("\\").reverse().slice(1).reverse().join("\\") + "\\" + value;
+					}
+					DEFINE_CONFIG = DEFINE_CONFIG.replace('/', '\\');
+				}
+				else {
+					ErrorMsg('定義名 "' + name + '" は不明です。');
+					++error_count;
+				}
+			}
+		}
+		else if ('@' == ch) {
+			return error_count;
+		}
+	}
+	return error_count;
+}
 
 function GetLineText(lineno) {
 	var str = Editor.GetLineStr(lineno);
@@ -111,12 +172,11 @@ function ConvertToJimakuText(text) {
 
 function GetTalkerProcessName(talker) {
 	if ('undefined' == typeof TALKERS_SETTING) {
-		var pathMacroFile = Editor.ExpandParameter('$M');
-		var pathMacroDir = pathMacroFile.split("\\").reverse().slice(1).reverse().join("\\") + "\\";
+		var filepath = DEFINE_CONFIG + '\\talkers.txt';
 
 		TALKERS_SETTING = {};
 		var fs = new ActiveXObject("Scripting.FileSystemObject");
-		var file = fs.OpenTextFile(pathMacroDir + 'talkers.txt', 1, false, 0);
+		var file = fs.OpenTextFile(filepath, 1, false, 0);
 		while (!file.AtEndOfStream) {
 			var line = file.ReadLine().replace(/(^\s+)|(\s+$)/g, "");
 			if (0 < line.length && '#' == line.charAt(0)) {

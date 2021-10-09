@@ -158,11 +158,13 @@
 	shell = new ActiveXObject('wscript.shell');
 	shell.CurrentDirectory = pathMacroDir
 
-	var PLAY = 1;
-	var TEXT = 2;
-	var SAVE = 4;
-	var SAVEALL = 8;
-	var SYNC = 16;
+	var EDITOR  = 1;
+	var PLAY = 2;
+	var TEXT = 4;
+	var SAVE = 8;
+	var SAVEALL = 16;
+	var SYNC = 32;
+	var CONFIG = 64;
 	for (var processName in dic) {
 		var talkers = dic[processName].talkers;
 		var params = dic[processName].params;
@@ -177,7 +179,7 @@
 			ls.push(talkers[i] + "＞" + ConvertToEditorText(texts[i]));
 		}
 		var textAll = ls.join("<endtalk>\n");
-		var result = RunRemoteTalkEditor("TransferString.exe -t RemoteTalkEditor64 -e RemoteTalkEditor64.exe " + (TEXT | SAVEALL | SYNC) + " \"" + processName + "\t" + textAll + "\t" + outputName + "\t<endtalk>\"");
+		var result = RunRemoteTalkEditor("TransferString.exe -t RemoteTalkEditor64 -e RemoteTalkEditor64.exe " + (EDITOR | TEXT | SAVEALL | SYNC | CONFIG) + " \"1.1.0\t" + processName + "\t" + textAll + "\t" + outputName + "\t<endtalk>\t" + DEFINE_CONFIG + "\"");
 		if (0 != result) {
 			//	一時フォルダの削除
 			if (fs.FolderExists(path_output_temp_dir)) {
@@ -198,20 +200,6 @@
 			//	エディタが出力した不要txtを削除
 			if (fs.FileExists(outputName + '-' + i + ".txt")) {
 				fs.DeleteFile(outputName + '-' + i + ".txt");
-			}
-
-			//	終末ポーズを追加する
-			var addSilence = GetAddSilence(processName);
-			if ("SofTalk" == processName && 44 == fs.GetFile(from).Size)
-			{
-				//  44byteとは、長さが0のWAVファイルのサイズ。空テキストをSofTalkに生成させると生まれる。
-				//  500とは、SofTalkで文章を読ませた時に挿入される、末尾の無音長さ(500ms)。これが空テキストを生成させた時のみ挿入されないため、ここで挿入してあげる。
-				addSilence += 500;
-			}
-			if (0 != addSilence)
-			{
-				var command = 'AddSilence.exe ' + addSilence + ' "' + from + '"';
-				shell.Run(command, 0, true);
 			}
 
 			//	ファイルを最終的な名前にmoveする
@@ -255,6 +243,8 @@
 })();
 
 function DefineConstVar() {
+	DEFINE_CONFIG = Editor.ExpandParameter('$M').split("\\").reverse().slice(1).reverse().join("\\");
+
 	var error_count = 0;
 	var last = Editor.GetLineCount(0);
 	for (var lineno = 1; lineno < last; ++lineno) {
@@ -281,6 +271,17 @@ function DefineConstVar() {
 						DEFINE_OUTPUT = Editor.ExpandParameter('$F').split("\\").reverse().slice(1).reverse().join("\\") + "\\" + value;
 					}
 					DEFINE_OUTPUT = DEFINE_OUTPUT.replace('/', '\\');
+				}
+				else if ('CONFIG' == name) {
+					if (':' == value.indexOf(1) || '\\' == value.indexOf(0)) {
+						//	絶対パス
+						DEFINE_CONFIG = value;
+					}
+					else {
+						//	相対パス
+						DEFINE_CONFIG = Editor.ExpandParameter('$F').split("\\").reverse().slice(1).reverse().join("\\") + "\\" + value;
+					}
+					DEFINE_CONFIG = DEFINE_CONFIG.replace('/', '\\');
 				}
 				else {
 					ErrorMsg('定義名 "' + name + '" は不明です。');
@@ -362,12 +363,11 @@ function ConvertToJimakuText(text) {
 
 function GetTalkerProcessName(talker) {
 	if ('undefined' == typeof TALKERS_SETTING) {
-		var pathMacroFile = Editor.ExpandParameter('$M');
-		var pathMacroDir = pathMacroFile.split("\\").reverse().slice(1).reverse().join("\\") + "\\";
+		var filepath = DEFINE_CONFIG + '\\talkers.txt';
 
 		TALKERS_SETTING = {};
 		var fs = new ActiveXObject("Scripting.FileSystemObject");
-		var file = fs.OpenTextFile(pathMacroDir + 'talkers.txt', 1, false, 0);
+		var file = fs.OpenTextFile(filepath, 1, false, 0);
 		while (!file.AtEndOfStream) {
 			var line = file.ReadLine().replace(/(^\s+)|(\s+$)/g, "");
 			if (0 < line.length && '#' == line.charAt(0)) {
@@ -391,36 +391,6 @@ function GetTalkerProcessName(talker) {
 		}
 	}
 	return processName;
-}
-
-function GetAddSilence(processName) {
-	if ('undefined' == typeof ADD_SILENCE) {
-		var pathMacroFile = Editor.ExpandParameter('$M');
-		var pathMacroDir = pathMacroFile.split("\\").reverse().slice(1).reverse().join("\\") + "\\";
-
-		ADD_SILENCE = {};
-		var fs = new ActiveXObject("Scripting.FileSystemObject");
-		var file = fs.OpenTextFile(pathMacroDir + 'addsilence.txt', 1, false, 0);
-		while (!file.AtEndOfStream) {
-			var line = file.ReadLine().replace(/(^\s+)|(\s+$)/g, "");
-			if (0 < line.length && '#' == line.charAt(0)) {
-				continue;
-			}
-			var tokens = line.split('=');
-			if (2 != tokens.length) {
-				continue;
-			}
-			ADD_SILENCE[tokens[0].replace(/(^\s+)|(\s+$)/g, "")] = tokens[1].replace(/(^\s+)|(\s+$)/g, "");
-		}
-		file.Close();
-	}
-	if ('undefined' == typeof ADD_SILENCE[processName]) {
-		return 0;
-	}
-	else
-	{
-		return Number(ADD_SILENCE[processName]);
-	}
 }
 
 function RunRemoteTalkEditor(command) {
