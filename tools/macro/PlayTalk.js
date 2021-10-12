@@ -23,7 +23,7 @@
 	var SAVEALL = 16;
 	var SYNC = 32;
 	var CONFIG = 64;
-	RunRemoteTalkEditor("TransferString.exe -t RemoteTalkEditor64 -e RemoteTalkEditor64.exe " + (EDITOR | PLAY | TEXT | CONFIG) + " \"1.1.0\t" + processName + "\t" + text + "\t" + DEFINE_CONFIG + "\"");
+	RunRemoteTalkEditor("TransferString.exe -t RemoteTalkEditor64 -e RemoteTalkEditor64.exe " + (EDITOR | PLAY | TEXT | CONFIG) + " \"1.1.1\t" + processName + "\t" + text + "\t" + DEFINE_CONFIG + "\"");
 })();
 
 function DefineConstVar() {

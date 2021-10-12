@@ -138,7 +138,7 @@
 			ls.push(talkers[i] + "ÅÑ" + ConvertToEditorText(texts[i]));
 		}
 		var textAll = ls.join("<endtalk>\n");
-		var result = RunRemoteTalkEditor("TransferString.exe -t RemoteTalkEditor64 -e RemoteTalkEditor64.exe " + (EDITOR | TEXT | SAVEALL | SYNC | CONFIG) + " \"1.1.0\t" + processName + "\t" + textAll + "\t" + outputName + "\t<endtalk>\t" + DEFINE_CONFIG + "\"");
+		var result = RunRemoteTalkEditor("TransferString.exe -t RemoteTalkEditor64 -e RemoteTalkEditor64.exe " + (EDITOR | TEXT | SAVEALL | SYNC | CONFIG) + " \"1.1.1\t" + processName + "\t" + textAll + "\t" + outputName + "\t<endtalk>\t" + DEFINE_CONFIG + "\"");
 		if (0 != result) {
 			//	àÍéûÉtÉHÉãÉ_ÇÃçÌèú
 			if (fs.FolderExists(path_output_temp_dir)) {
