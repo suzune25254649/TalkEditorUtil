@@ -23,11 +23,13 @@
 #   VOICEROID＋ 京町セイカ EX
 #   VOICEROID＋ 東北ずん子 EX
 #   VOICEROID＋ 東北きりたん EX
-#   VOICEROID＋ 水奈瀬コウ EX       ※未確認
+#   VOICEROID＋ 水奈瀬コウ EX
 #   VOICEROID＋ 結月ゆかり EX       ※未確認
-#   VOICEROID＋ 鷹の爪 吉田くん EX  ※未確認
+#   VOICEROID＋ 鷹の爪 吉田くん EX
 #   VOICEROID＋ 月読アイ EX         ※未確認
 #   VOICEROID＋ 月読ショウタ EX     ※未確認
+#   VOICEROID＋ 琴葉葵
+#   VOICEROID＋ 琴葉茜
 
 
 default     = VoiceroidEditor
