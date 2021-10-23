@@ -14,10 +14,11 @@
 #
 # 【エディタ名の一覧】
 #   VoiceroidEditor             ※VOICEROID2エディタのことです
+#	AIVoiceEditor
 #   GynoidTalkEditor
 #   CeVIO Creative Studio       ※CeVIO CS7のことです。CS6は非対応です
-#   SofTalk
 #   CeVIO AI
+#   SofTalk
 #   音街ウナTalk Ex
 #   VOICEROID＋ 民安ともえ EX
 #   VOICEROID＋ 京町セイカ EX
