@@ -1,4 +1,6 @@
-var command = "TransferString.exe -t RemoteTalkEditor64 -e RemoteTalkEditor64.exe 0 \"1.1.1\"";
+eval((new ActiveXObject("Scripting.FileSystemObject")).OpenTextFile(Editor.ExpandParameter('$M').split("\\").reverse().slice(1).reverse().join("\\") + "\\functions.js",1).ReadAll());
+
+var command = "TransferString.exe -t RemoteTalkEditor64 -e RemoteTalkEditor64.exe 0 \"" + TOOL_VERSION + "\"";
 var pathMacroFile = Editor.ExpandParameter('$M');
 var pathMacroDir = pathMacroFile.split("\\").reverse().slice(1).reverse().join("\\") + "\\";
 shell = new ActiveXObject('wscript.shell');

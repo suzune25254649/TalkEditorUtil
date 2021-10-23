@@ -1,7 +1,6 @@
+eval((new ActiveXObject("Scripting.FileSystemObject")).OpenTextFile(Editor.ExpandParameter('$M').split("\\").reverse().slice(1).reverse().join("\\") + "\\functions.js",1).ReadAll());
 
 (function() {
-	var fs = new ActiveXObject("Scripting.FileSystemObject");
-
 	var fromline = Number(Editor.ExpandParameter('$y'));
 	for (var lineno = fromline - 1; 1 <= lineno; --lineno) {
 		if (IsTalkerLine(lineno)) {
@@ -11,16 +10,3 @@
 		}
 	}
 })();
-
-function GetLineText(lineno) {
-	var str = Editor.GetLineStr(lineno);
-	var ch = str.charAt(0);
-	if ('#' == ch || '$' == ch) {
-		return '';
-	}
-	return str;
-}
-
-function IsTalkerLine(lineno) {
-	return ('@' == GetLineText(lineno).charAt(0));
-}
