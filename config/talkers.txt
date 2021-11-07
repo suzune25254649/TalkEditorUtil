@@ -48,3 +48,4 @@ EX“Œ–k ‚«   = VOICEROID{ “Œ–k‚«‚è‚½‚ñ EX
 EXŒ·Šª      = VOICEROID{ –¯ˆÀ‚Æ‚à‚¦ EX
 ‚ä‚Á‚­‚è    = SofTalk
 ¬t˜Z‰Ô    = CeVIO AI
+Œ·Šªƒ}ƒL (“ú)=CeVIO AI
