@@ -187,7 +187,7 @@ CeVIOは外部ソフトから「調声」することが難しく、このツー
 * VOICEROID2(32bit版)
 * GynoidTalk
 * CeVIO CS7(IA, ONE, さとうささら, すずきつづみ, タカハシ)
-* CeVIO AI(IA, ONE, 小春六花)
+* CeVIO AI(IA, ONE, 小春六花, 弦巻マキ (日), さとうささら)
 * SofTalk(ver1.93.50以降)
 * 音街ウナTalk Ex
 * VOICEROID＋ 民安ともえ EX
