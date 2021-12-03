@@ -220,6 +220,7 @@ https://twitter.com/suzune25254649
 - GoogleIME利用時に、Voiceroid2、A.I.VOICE、Gynoidトークにてファイル保存がうまくいかない場合があった問題を修正
 - CeVIO AIのバージョンアップにより、ONEの名前がOИEに変更されて動かなくなったことへの対応。ONEでもOИEでの動くようにしてあります。
 - CeVIO AIのさとうささら、IAが正しく動かないことがあったので修正。
+- アンチウイルスソフトが誤検出してしまう問題を修正
 
 ## ver1.1.2
 - A.I.VOICEに対応しました。
