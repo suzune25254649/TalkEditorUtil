@@ -1,3 +1,4 @@
+Init();
 (function() {
 	var cnt = 0;
 	for (var lineno = 1; lineno <= Editor.GetLineCount(0); ++lineno) {
@@ -8,15 +9,17 @@
 	MessageBox("ƒZƒŠƒt‚Ì” : " + cnt, 0x1000);
 })();
 
-TOOL_VERSION = "1.1.3"
+function Init() {
+	TOOL_VERSION = "1.1.3"
 
-EDITOR  = 1;
-PLAY = 2;
-TEXT = 4;
-SAVE = 8;
-SAVEALL = 16;
-SYNC = 32;
-CONFIG = 64;
+	EDITOR  = 1;
+	PLAY = 2;
+	TEXT = 4;
+	SAVE = 8;
+	SAVEALL = 16;
+	SYNC = 32;
+	CONFIG = 64;
+}
 
 function DefineConstVar() {
 	DEFINE_CONFIG = Editor.ExpandParameter('$M').split("\\").reverse().slice(1).reverse().join("\\");
