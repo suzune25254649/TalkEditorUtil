@@ -19,33 +19,42 @@
 #   CeVIO Creative Studio       ※CeVIO CS7のことです。CS6は非対応です
 #   CeVIO AI
 #   SofTalk
+#   VOICEVOX
+#   CoeFont                     ※CoeFont Cloudです
 #   音街ウナTalk Ex
 #   VOICEROID＋ 民安ともえ EX
 #   VOICEROID＋ 京町セイカ EX
 #   VOICEROID＋ 東北ずん子 EX
 #   VOICEROID＋ 東北きりたん EX
-#   VOICEROID＋ 水奈瀬コウ EX
+#   VOICEROID＋ 水奈瀬コウ EX       ※未確認
 #   VOICEROID＋ 結月ゆかり EX       ※未確認
 #   VOICEROID＋ 鷹の爪 吉田くん EX
 #   VOICEROID＋ 月読アイ EX         ※未確認
 #   VOICEROID＋ 月読ショウタ EX     ※未確認
-#   VOICEROID＋ 琴葉葵
-#   VOICEROID＋ 琴葉茜
 
 
-default     = VoiceroidEditor
-鳴花        = GynoidTalkEditor
-flower      = GynoidTalkEditor
-IA          = CeVIO Creative Studio
-ONE         = CeVIO Creative Studio
-さとうささら= CeVIO Creative Studio
-すずきつづみ= CeVIO Creative Studio
-タカハシ    = CeVIO Creative Studio
-EX音街      = 音街ウナTalk Ex
-EX京町      = VOICEROID＋ 京町セイカ EX
-EX東北 ず   = VOICEROID＋ 東北ずん子 EX
-EX東北 き   = VOICEROID＋ 東北きりたん EX
-EX弦巻      = VOICEROID＋ 民安ともえ EX
-ゆっくり    = SofTalk
-小春六花    = CeVIO AI
+default      = VoiceroidEditor
+琴葉         = AIVoiceEditor
+蕾           = AIVoiceEditor
+鳴花         = GynoidTalkEditor
+flower       = GynoidTalkEditor
+IA           = CeVIO Creative Studio
+ONE          = CeVIO Creative Studio
+OИE         = CeVIO Creative Studio
+さとうささら = CeVIO Creative Studio
+すずきつづみ = CeVIO Creative Studio
+タカハシ     = CeVIO Creative Studio
 弦巻マキ (日)=CeVIO AI
+EX音街       = 音街ウナTalk Ex
+EX京町       = VOICEROID＋ 京町セイカ EX
+EX東北 ず    = VOICEROID＋ 東北ずん子 EX
+EX東北 き    = VOICEROID＋ 東北きりたん EX
+EX弦巻       = VOICEROID＋ 民安ともえ EX
+ゆっくり     = SofTalk
+小春六花     = CeVIO AI
+ずんだもん   = VOICEVOX
+めたん       = VOICEVOX
+つむぎ       = VOICEVOX
+リツ         = VOICEVOX
+アベルーニ   = CoeFont
+

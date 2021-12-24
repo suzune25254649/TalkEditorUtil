@@ -33,3 +33,6 @@ CeVIO AI = 800
 
 SofTalk = 300
 
+# CoeFontは、500msの終末ポーズが入るので、800になるように300足すことにしておきました。800msはVOICEROID2のデフォルト終末ポーズ長です。
+
+CoeFont = 300
