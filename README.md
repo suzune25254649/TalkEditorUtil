@@ -226,6 +226,10 @@ https://twitter.com/suzune25254649
 
 # 更新履歴
 
+## Ver1.1.5
+- CoeFont.CLOUDで動かなくなっていたのを修正。
+- CoeFont.CLOUDで「前回と同じ設定、同じセリフ」を再生する際に、ポイントが減らないようキャッシュするようにしました。
+
 ## Ver1.1.4
 - VOICEVOXに対応。
 - CoeFont.CLOUDに対応。
