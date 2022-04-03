@@ -12,7 +12,7 @@ Init();
 })();
 
 function Init() {
-	TOOL_VERSION = "1.1.5"
+	TOOL_VERSION = "1.1.6"
 
 	EDITOR  = 1;
 	PLAY = 2;
@@ -63,6 +63,21 @@ function DefineConstVar() {
 						DEFINE_CONFIG = Editor.ExpandParameter('$F').split("\\").reverse().slice(1).reverse().join("\\") + "\\" + value;
 					}
 					DEFINE_CONFIG = DEFINE_CONFIG.replace('/', '\\');
+				}
+				else if ('SEPARATOR' == name) {
+					if ('' != value) {
+						DEFINE_SEPARATOR = value;
+					}
+				}
+				else if ('AUTO_HEADER' == name) {
+					if ('' != value) {
+						AUTO_HEADER = value;
+					}
+				}
+				else if ('AUTO_FOOTER' == name) {
+					if ('' != value) {
+						AUTO_FOOTER = value;
+					}
 				}
 				else {
 					ErrorMsg('íËã`ñº "' + name + '" ÇÕïsñæÇ≈Ç∑ÅB');
@@ -146,6 +161,12 @@ function GetCurrentTalk() {
 		texts.push(GetLineText(i).replace(/(^\s+)|(\s+$)/g, ""));
 	}
 	var text = texts.join("\n");
+	if ('undefined' != typeof AUTO_HEADER) {
+		text = AUTO_HEADER + text;
+	}
+	if ('undefined' != typeof AUTO_FOOTER) {
+		text = AUTO_FOOTER + text;
+	}
 	return [true, talker, text]
 }
 
@@ -165,6 +186,7 @@ function ConvertToEditorText(text) {
 	text = text.replace(/([^{]){([^{]+?)}/g, "$1$2");
 	text = text.replace(/{{/g, "{");
 	text = text.replace(/}}/g, "}");
+	text = text.replace(/<[^>]+>/g, "");
 	return text;
 }
 

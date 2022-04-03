@@ -76,13 +76,6 @@ Init();
 		++toline;
 	}
 
-	//	テキスト先頭から、開始行に至るまでの間に、いくつセリフが存在するかをカウントする
-	for (var i = 1; i < fromline; ++i) {
-		if (IsTalkerLine(i)) {
-			++talkno;
-		}
-	}
-
 	var last = toline;
 	var dic = {};
 	var all_talkers = [];
@@ -90,7 +83,7 @@ Init();
 	var talker = '';
 	var param = '';
 	var text = '';
-	for (var lineno = fromline; lineno <= last; ++lineno) {
+	for (var lineno = 1; lineno <= last; ++lineno) {
 
 		var is_talkerline = IsTalkerLine(lineno);
 		if (!is_talkerline) {
@@ -108,13 +101,38 @@ Init();
 					};
 				}
 				text = text.replace(/(^\s+)|(\s+$)/g, "");
-				all_talkers.push(talker);
-				all_texts.push(text);
-				dic[processName].talkers.push(talker);
-				dic[processName].params.push(param);
-				dic[processName].texts.push(text);
-				dic[processName].talknos.push(talkno);
-				++talkno;
+				if ('undefined' != typeof AUTO_HEADER) {
+					text = AUTO_HEADER + text;
+				}
+				if ('undefined' != typeof AUTO_FOOTER) {
+					text = AUTO_FOOTER + text;
+				}
+
+				if ('undefined' == typeof DEFINE_SEPARATOR) {
+					all_talkers.push(talker);
+					all_texts.push(text);
+					dic[processName].talkers.push(talker);
+					dic[processName].params.push(param);
+					dic[processName].texts.push(text);
+					dic[processName].talknos.push(talkno);
+					++talkno;
+				}
+				else {
+					var ls = text.split(DEFINE_SEPARATOR);
+					for (var i = 0; i < ls.length; ++i) {
+						var t = ls[i];
+						if ('' != t)
+						{
+							all_talkers.push(talker);
+							all_texts.push(t);
+							dic[processName].talkers.push(talker);
+							dic[processName].params.push(param);
+							dic[processName].texts.push(t);
+							dic[processName].talknos.push(talkno);
+							++talkno;
+						}
+					}
+				}
 				text = '';
 			}
 			if (is_talkerline) {
@@ -141,6 +159,11 @@ Init();
 					++talkno;
 					text = '';
 				}
+			}
+
+			if (fromline == lineno) {
+				dic = {};
+				all_talkers = [];
 			}
 		}
 	}
@@ -236,7 +259,7 @@ Init();
 })();
 
 function Init() {
-	TOOL_VERSION = "1.1.5"
+	TOOL_VERSION = "1.1.6"
 
 	EDITOR  = 1;
 	PLAY = 2;
@@ -287,6 +310,21 @@ function DefineConstVar() {
 						DEFINE_CONFIG = Editor.ExpandParameter('$F').split("\\").reverse().slice(1).reverse().join("\\") + "\\" + value;
 					}
 					DEFINE_CONFIG = DEFINE_CONFIG.replace('/', '\\');
+				}
+				else if ('SEPARATOR' == name) {
+					if ('' != value) {
+						DEFINE_SEPARATOR = value;
+					}
+				}
+				else if ('AUTO_HEADER' == name) {
+					if ('' != value) {
+						AUTO_HEADER = value;
+					}
+				}
+				else if ('AUTO_FOOTER' == name) {
+					if ('' != value) {
+						AUTO_FOOTER = value;
+					}
 				}
 				else {
 					ErrorMsg('定義名 "' + name + '" は不明です。');
@@ -370,6 +408,12 @@ function GetCurrentTalk() {
 		texts.push(GetLineText(i).replace(/(^\s+)|(\s+$)/g, ""));
 	}
 	var text = texts.join("\n");
+	if ('undefined' != typeof AUTO_HEADER) {
+		text = AUTO_HEADER + text;
+	}
+	if ('undefined' != typeof AUTO_FOOTER) {
+		text = AUTO_FOOTER + text;
+	}
 	return [true, talker, text]
 }
 
@@ -389,6 +433,7 @@ function ConvertToEditorText(text) {
 	text = text.replace(/([^{]){([^{]+?)}/g, "$1$2");
 	text = text.replace(/{{/g, "{");
 	text = text.replace(/}}/g, "}");
+	text = text.replace(/<[^>]+>/g, "");
 	return text;
 }
 

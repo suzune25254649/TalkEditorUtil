@@ -1,16 +1,64 @@
 Init();
 (function() {
+	if (0 != DefineConstVar()) {
+		return;
+	}
 	var cnt = 0;
 	for (var lineno = 1; lineno <= Editor.GetLineCount(0); ++lineno) {
 		if (IsTalkerLine(lineno)) {
 			++cnt;
 		}
 	}
-	MessageBox("セリフの数 : " + cnt, 0x1000);
+	if ('undefined' == typeof DEFINE_SEPARATOR) {
+		MessageBox("セリフの数 : " + cnt, 0x1000);
+	}
+	else {
+		var talkno = 0;
+		var talker = '';
+		var last = Editor.GetLineCount(0);
+		var text = '';
+		for (var lineno = 1; lineno <= last; ++lineno) {
+
+			var is_talkerline = IsTalkerLine(lineno);
+			if (!is_talkerline) {
+				text += GetLineText(lineno).replace(/(^\s+)|(\s+$)/g, "") + "\n";
+			}
+			if (is_talkerline || lineno == last) {
+				if ('' != talker) {
+					text = text.replace(/(^\s+)|(\s+$)/g, "");
+					if ('undefined' != typeof AUTO_HEADER) {
+						text = AUTO_HEADER + text;
+					}
+					if ('undefined' != typeof AUTO_FOOTER) {
+						text = AUTO_FOOTER + text;
+					}
+					var ls = text.split(DEFINE_SEPARATOR);
+					for (var i = 0; i < ls.length; ++i) {
+						var t = ls[i];
+						if ('' != t)
+						{
+							++talkno;
+						}
+					}
+					text = '';
+				}
+				if (is_talkerline) {
+					talker = GetTalker(lineno);
+
+					if (lineno == last) {
+						//	最終行が話者指定行である場合は、空テキストが出力されるべき
+						++talkno;
+						text = '';
+					}
+				}
+			}
+		}
+		MessageBox("セリフの数\n分割前 : " + cnt + "\n分割後 : " + talkno, 0x1000);
+	}
 })();
 
 function Init() {
-	TOOL_VERSION = "1.1.5"
+	TOOL_VERSION = "1.1.6"
 
 	EDITOR  = 1;
 	PLAY = 2;
@@ -61,6 +109,21 @@ function DefineConstVar() {
 						DEFINE_CONFIG = Editor.ExpandParameter('$F').split("\\").reverse().slice(1).reverse().join("\\") + "\\" + value;
 					}
 					DEFINE_CONFIG = DEFINE_CONFIG.replace('/', '\\');
+				}
+				else if ('SEPARATOR' == name) {
+					if ('' != value) {
+						DEFINE_SEPARATOR = value;
+					}
+				}
+				else if ('AUTO_HEADER' == name) {
+					if ('' != value) {
+						AUTO_HEADER = value;
+					}
+				}
+				else if ('AUTO_FOOTER' == name) {
+					if ('' != value) {
+						AUTO_FOOTER = value;
+					}
 				}
 				else {
 					ErrorMsg('定義名 "' + name + '" は不明です。');
@@ -144,6 +207,12 @@ function GetCurrentTalk() {
 		texts.push(GetLineText(i).replace(/(^\s+)|(\s+$)/g, ""));
 	}
 	var text = texts.join("\n");
+	if ('undefined' != typeof AUTO_HEADER) {
+		text = AUTO_HEADER + text;
+	}
+	if ('undefined' != typeof AUTO_FOOTER) {
+		text = AUTO_FOOTER + text;
+	}
 	return [true, talker, text]
 }
 
@@ -163,6 +232,7 @@ function ConvertToEditorText(text) {
 	text = text.replace(/([^{]){([^{]+?)}/g, "$1$2");
 	text = text.replace(/{{/g, "{");
 	text = text.replace(/}}/g, "}");
+	text = text.replace(/<[^>]+>/g, "");
 	return text;
 }
 
