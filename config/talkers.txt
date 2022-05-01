@@ -21,6 +21,7 @@
 #   SofTalk
 #   VOICEVOX
 #   CoeFont                     ※CoeFont Cloudです
+#	COEIROINKonVOICEVOX
 #   音街ウナTalk Ex
 #   VOICEROID＋ 民安ともえ EX
 #   VOICEROID＋ 京町セイカ EX
@@ -57,4 +58,9 @@ EX弦巻       = VOICEROID＋ 民安ともえ EX
 つむぎ       = VOICEVOX
 リツ         = VOICEVOX
 アベルーニ   = CoeFont
+つくよみ     = COEIROINKonVOICEVOX
+MANA         = COEIROINKonVOICEVOX
+おふとん     = COEIROINKonVOICEVOX
+ディア       = COEIROINKonVOICEVOX
+アルマ       = COEIROINKonVOICEVOX
 

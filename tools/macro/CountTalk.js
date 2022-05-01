@@ -58,7 +58,7 @@ Init();
 })();
 
 function Init() {
-	TOOL_VERSION = "1.1.6"
+	TOOL_VERSION = "1.1.7"
 
 	EDITOR  = 1;
 	PLAY = 2;
