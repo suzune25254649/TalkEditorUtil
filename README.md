@@ -232,6 +232,7 @@ https://twitter.com/suzune25254649
 - COEIROINK on VOICEVOX に対応。
 - A.I.VOICE ver1.3.0.1に対応。（1.3.0.0やそれ以前でも動きます）
 - アップデート告知ダイアログで、ダウンロードページをブラウザで開くことができるようになりました。
+- 追記：同Ver1.1.7にて差し換えを行ないました。Friendly系のDLLを同梱するのではなく、nuget経由で公式からダウンロード取得するようにしました。
 
 ## Ver1.1.6
 - A.I.VOICE、VOICEROID2、GynoidTalk、Voiceroid+Ex、音街ウナTalk Exの音声保存時に、保存ダイアログが出ないようになり、保存ミスが起きないようになりました。
