@@ -53,7 +53,7 @@ setup.batを起動すると、サクラエディタをダウンロードして�
 * GynoidTalk
 * CeVIO CS7
 * CeVIO AI
-* SofTalk(ver1.93.50以降)
+* 棒読みちゃん
 
 **※SofTalkはver1.93.50以降を使ってください。**  
 
