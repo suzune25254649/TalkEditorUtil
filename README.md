@@ -207,6 +207,8 @@ CeVIOは外部ソフトから「調声」することが難しく、このツー
 * VOICEVOX
 * CoeFont.CLOUD
 * COEIROINK on VOICEVOX
+* BouyomiChan
+* TALQu
 
 # その他機能
 - トークソフトで「！？」「！！！？？？？」「！？！？」といった、！と？の混同を読み上げさせる場合、「？」に省略されます。
@@ -227,6 +229,10 @@ https://twitter.com/suzune25254649
 ただし、このツールを利用した際に発生した いかなる損失や損害が発生についても、作者は一切の責任を負いかねます。
 
 # 更新履歴
+
+## Ver1.1.8
+- 棒読みちゃんに対応
+- TALQuに対応
 
 ## Ver1.1.7
 - COEIROINK on VOICEVOX に対応。

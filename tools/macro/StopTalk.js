@@ -9,7 +9,7 @@ Init();
 })();
 
 function Init() {
-	TOOL_VERSION = "1.1.7"
+	TOOL_VERSION = "1.1.8"
 
 	EDITOR  = 1;
 	PLAY = 2;

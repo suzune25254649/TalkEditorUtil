@@ -32,6 +32,8 @@
 #   VOICEROID＋ 鷹の爪 吉田くん EX
 #   VOICEROID＋ 月読アイ EX         ※未確認
 #   VOICEROID＋ 月読ショウタ EX     ※未確認
+#	BouyomiChan
+#	TALQu
 
 
 default      = VoiceroidEditor
@@ -51,7 +53,7 @@ EX京町       = VOICEROID＋ 京町セイカ EX
 EX東北 ず    = VOICEROID＋ 東北ずん子 EX
 EX東北 き    = VOICEROID＋ 東北きりたん EX
 EX弦巻       = VOICEROID＋ 民安ともえ EX
-ゆっくり     = SofTalk
+ゆっくり     = BouyomiChan
 小春六花     = CeVIO AI
 ずんだもん   = VOICEVOX
 めたん       = VOICEVOX
@@ -63,4 +65,5 @@ MANA         = COEIROINKonVOICEVOX
 おふとん     = COEIROINKonVOICEVOX
 ディア       = COEIROINKonVOICEVOX
 アルマ       = COEIROINKonVOICEVOX
-
+Haruqa       = TALQu
+虚音イフ     = TALQu
